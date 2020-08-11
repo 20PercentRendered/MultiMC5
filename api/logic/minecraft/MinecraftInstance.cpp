@@ -279,10 +279,6 @@ QStringList MinecraftInstance::extraArguments() const
     }
     return list;
 }
-QString MinecraftInstance::minecraftArgs() const
-{
-    return m_settings->get("MinecraftArgs").toString();
-}
 
 QStringList MinecraftInstance::javaArguments() const
 {
