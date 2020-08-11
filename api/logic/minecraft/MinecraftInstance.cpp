@@ -84,6 +84,9 @@ MinecraftInstance::MinecraftInstance(SettingsObjectPtr globalSettings, SettingsO
     m_settings->registerPassthrough(globalSettings->getSetting("JavaVersion"), javaOrLocation);
     m_settings->registerPassthrough(globalSettings->getSetting("JavaArchitecture"), javaOrLocation);
 
+    // Minecraft Arguments
+    m_settings->registerSetting("MinecraftArgs", QString());
+
     // Window Size
     auto windowSetting = m_settings->registerSetting("OverrideWindow", false);
     m_settings->registerOverride(globalSettings->getSetting("LaunchMaximized"), windowSetting);
@@ -276,6 +279,10 @@ QStringList MinecraftInstance::extraArguments() const
     }
     return list;
 }
+QString MinecraftInstance::minecraftArgs() const
+{
+    return m_settings->get("MinecraftArgs").toString();
+}
 
 QStringList MinecraftInstance::javaArguments() const
 {
@@ -456,6 +463,12 @@ QString MinecraftInstance::createLaunchScript(AuthSessionPtr session)
         launchScript += "param " + param + "\n";
     }
 
+    // Custom Minecraft args, if any
+    {
+        if (settings()->get("MinecraftArgs").toString()!="") {
+            launchScript += "param "+ settings()->get("MinecraftArgs").toString() + "\n";
+        }
+    }
     // window size, title and state, legacy
     {
         QString windowParams;

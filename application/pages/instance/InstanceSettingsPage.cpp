@@ -78,6 +78,15 @@ void InstanceSettingsPage::applySettings()
         m_settings->reset("ShowConsoleOnError");
     }
 
+    // Minecraft Arguments
+    if (ui->minecraftArgsBox->text() != "")
+    {
+        m_settings->set("MinecraftArgs", ui->minecraftArgsBox->text());
+    } 
+    else
+    {
+        m_settings->reset("MinecraftArgs");
+    }
     // Window Size
     bool window = ui->windowSizeGroupBox->isChecked();
     m_settings->set("OverrideWindow", window);
@@ -172,6 +181,9 @@ void InstanceSettingsPage::loadSettings()
     ui->showConsoleCheck->setChecked(m_settings->get("ShowConsole").toBool());
     ui->autoCloseConsoleCheck->setChecked(m_settings->get("AutoCloseConsole").toBool());
     ui->showConsoleErrorCheck->setChecked(m_settings->get("ShowConsoleOnError").toBool());
+
+    // Minecraft Arguments
+    ui->minecraftArgsBox->setText(m_settings->get("MinecraftArgs").toString());
 
     // Window Size
     ui->windowSizeGroupBox->setChecked(m_settings->get("OverrideWindow").toBool());
