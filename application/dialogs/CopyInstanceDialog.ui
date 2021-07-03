@@ -117,9 +117,9 @@
     </widget>
    </item>
    <item>
-    <widget class="QCheckBox" name="keepPlaytimeCheckbox">
+    <widget class="QCheckBox" name="copyPlaytimeCheckbox">
      <property name="text">
-      <string>Keep play time</string>
+      <string>Copy playtime</string>
      </property>
     </widget>
    </item>
